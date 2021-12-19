@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Change order
+{% endblock %}
+
+{% block content %}
+<article class="media content-section">
+  <div class="media-body">
+    <p><h3>Change order</h3></p>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+    <input class="btn btn-warning" type="Submit" name="Change order">
+   </div>
+  </article>
+{% endblock content %}
+
+{% block username %}
+{{user}}
+{% endblock %}

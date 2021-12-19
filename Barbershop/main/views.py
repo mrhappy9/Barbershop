@@ -60,11 +60,6 @@ def customer_info(request):
     return render(request, 'main/customer_info.html', context)
 
 
-def about(request):
-    # return HttpResponse("<h4>About</h4>")
-    return render(request, 'main/about.html')
-
-
 def customer_page(request):
     context = {}
     customers = Customers.objects.all().filter(user=request.user.id)
@@ -88,18 +83,18 @@ def order(request):
 
 def barber_book(request):
     context = {}
-    #print(Roles.objects.all().filter(name=request.user))
-    # print(request.user)
-    # role = Roles.objects.all().filter(name=request.user.username)
-    # print(role)
     barber_booked = []
+    barber_booked_customer = []
     orders = Order.objects.all()
     for book in orders:
         if book.role is not None and book.role.user == request.user:
-            barber_booked.append(book)
+            barber_booked.append([book, book.customer.name])
+            barber_booked_customer.append(book.customer.name)
 
     context['orders'] = barber_booked
     context['user'] = request.user
+    context['orders_customers'] = barber_booked
+    print(barber_booked_customer)
 
     return render(request, 'main/barber_booked.html', context)
 
@@ -134,6 +129,14 @@ def register_page(request):
 
     context = {'form': form}
     return render(request, 'main/register.html', context)
+
+
+def contact(request):
+    # return HttpResponse("<h4>About</h4>")
+    context = {}
+    context['user'] = request.user
+
+    return render(request, 'main/contact.html')
 
 
 def is_any_value_blank(*values):
