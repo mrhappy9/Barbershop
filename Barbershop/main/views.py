@@ -60,11 +60,6 @@ def customer_info(request):
     return render(request, 'main/customer_info.html', context)
 
 
-def about(request):
-    # return HttpResponse("<h4>About</h4>")
-    return render(request, 'main/about.html')
-
-
 def customer_page(request):
     context = {}
     customers = Customers.objects.all().filter(user=request.user.id)
@@ -134,6 +129,14 @@ def register_page(request):
 
     context = {'form': form}
     return render(request, 'main/register.html', context)
+
+
+def contact(request):
+    # return HttpResponse("<h4>About</h4>")
+    context = {}
+    context['user'] = request.user
+
+    return render(request, 'main/contact.html')
 
 
 def is_any_value_blank(*values):
