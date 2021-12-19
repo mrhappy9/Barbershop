@@ -82,7 +82,6 @@ def order(request):
     for orders in barbershops:
         if orders.customer is not None and orders.customer.user == request.user:
             barbershops_orders.append(orders)
-            print(orders.customer.user == request.user if orders.customer is not None else False)
     context['orders'] = barbershops_orders
     context['user'] = request.user
 

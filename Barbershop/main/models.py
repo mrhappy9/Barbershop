@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class Customers(models.Model):
-    """Пользователи"""
+    """Заказчики"""
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=25)
     surname = models.CharField(max_length=25)
@@ -28,7 +28,6 @@ class Roles(models.Model):
 
     role = models.CharField(max_length=15, choices=ROLE_NAMES)
     name = models.CharField(max_length=15, null=True)
-    user_id = models.ForeignKey(Customers, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Роль'
@@ -80,6 +79,7 @@ class Order(models.Model):
     time = models.CharField(max_length=50, choices=TIME)
     haircut_name = models.CharField(max_length=50, choices=HAIRCUTS)
     customer = models.ForeignKey(Customers, null=True, on_delete=models.SET_NULL)
+    role = models.ForeignKey(Roles, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Заказ'
