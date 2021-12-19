@@ -17,6 +17,7 @@ def home(request):
     context['haircuts'] = Order.HAIRCUTS
     context['orders'] = barbershops_orders
     context['BarberNames'] = barber_names
+    context['user'] = request.user
 
     return render(request, 'main/home.html', context)
 
@@ -34,6 +35,7 @@ def create_book(request):
                 form.save()
                 order = Order.objects.last()
                 order.customer = Customers.objects.get(user=request.user.id)
+                order.role = Roles.objects.get(name=barber)
                 order.save()
 
                 return redirect('home')
@@ -63,10 +65,6 @@ def about(request):
     return render(request, 'main/about.html')
 
 
-def pricing(request):
-    return render(request, 'main/pricing.html')
-
-
 def customer_page(request):
     context = {}
     customers = Customers.objects.all().filter(user=request.user.id)
@@ -86,6 +84,24 @@ def order(request):
     context['user'] = request.user
 
     return render(request, 'main/order.html', context)
+
+
+def barber_book(request):
+    context = {}
+    #print(Roles.objects.all().filter(name=request.user))
+    # print(request.user)
+    # role = Roles.objects.all().filter(name=request.user.username)
+    # print(role)
+    barber_booked = []
+    orders = Order.objects.all()
+    for book in orders:
+        if book.role is not None and book.role.user == request.user:
+            barber_booked.append(book)
+
+    context['orders'] = barber_booked
+    context['user'] = request.user
+
+    return render(request, 'main/barber_booked.html', context)
 
 
 def login_page(request):
