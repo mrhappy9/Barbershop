@@ -77,14 +77,13 @@ def customer_page(request):
 
 def order(request):
     context = {}
-    barbershops_orders = Order.objects.all()
-    # barber_names = Roles.objects.all().values_list('name', flat=True).distinct()
-    barber_names = Order.objects.all().values_list('barber', flat=True).distinct()
-    # context['times'] = Order.TIME
-    # context['haircuts'] = Order.HAIRCUTS
+    barbershops_orders = []
+    barbershops = Order.objects.all()
+    for orders in barbershops:
+        if orders.customer is not None and orders.customer.user == request.user:
+            barbershops_orders.append(orders)
     context['orders'] = barbershops_orders
     context['user'] = request.user
-    # context['BarberNames'] = barber_names
 
     return render(request, 'main/order.html', context)
 
