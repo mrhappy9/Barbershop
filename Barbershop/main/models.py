@@ -28,6 +28,7 @@ class Roles(models.Model):
 
     role = models.CharField(max_length=15, choices=ROLE_NAMES)
     name = models.CharField(max_length=15, null=True)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Роль'
