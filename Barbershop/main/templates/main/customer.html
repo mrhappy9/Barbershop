@@ -1,0 +1,84 @@
+{% extends 'main/base.html' %}
+
+{% block title%}
+Личный кабинет
+{% endblock%}
+
+{% block content %}
+  {% for customer in customers %}
+        <style>
+          .block-profile .panel, .block-profile.panel {
+           overflow: hidden;
+          }
+          .text-white {
+          color: #fff;
+          text-shadow: 1px 1px 2px #333;
+          }
+          .block-profile {
+          margin-bottom: 20px;
+          border-right:0;
+          border-left: 1px solid #ddd;
+          }
+          .profile-name {
+           display: table;
+           table-layout: fixed;
+           height: 100%;
+           width: 100%;
+           margin: 0;
+          }
+          .profile-name>[class*=col-] {
+           display: table-cell;
+           float: none;
+           table-layout: fixed;
+           vertical-align: middle;
+          }
+          .profile-images {
+           width: 128px!important;
+           height: 128px!important;
+          }
+          .list-group {
+          line-height: 1.3;
+          border-bottom:0
+          }
+          .list-group-item {
+          background: #ECE9E6;
+          background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#adadad));
+          background: -moz-linear-gradient(0% 0% 270deg,#fff, #adadad);
+          }
+          .panel-body {
+          background: #f7f7f7;
+          background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#bababa));
+          background: -moz-linear-gradient(0% 0% 270deg,#fff, #bababa);
+          }
+          </style>
+
+          <div class="container">
+          <div class="row">
+
+           <div class="col-md-3">
+           <div class="panel block-profile">
+           <div style="background-image: url('https://bootstraptema.ru/images/bg/bg-4.png')" class="panel-body text-center bg-center">
+           <div class="row profile-name">
+           <div class="col-xs-12 text-white">
+
+             <h4><u style="color:gray">Name:</u> {{customer.name}}</h4>
+             <p><u style="color:gray">Surname:</u> {{customer.surname}}</p>
+             <p><u style="color:gray">Info:  </u> {{customer.info}}</p>
+
+           </div>
+           </div>
+           </div>
+
+           <div class="list-group">
+           <a href=" {% url 'customer_info' %}" class="list-group-item">
+           <em class="fa fa-fw fa-clock-o text-muted"></em>Change</a>
+
+           </div>
+           </div>
+           </div>
+  {% endfor %}
+{% endblock%}
+
+{% block username %}
+{{user}}
+{% endblock %}

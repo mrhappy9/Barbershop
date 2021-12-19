@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<article class="media content-section">
+  <div class="media-body">
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_table }}
+    <input class="btn btn-warning" type="Submit" name="Book Barbershop">
+   </div>
+  </article>
+{% endblock content %}
+
+{% block username %}
+{{user}}
+{% endblock %}

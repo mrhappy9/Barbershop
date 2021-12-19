@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title%}
+Создание записи
+{% endblock%}
+
+{% block content %}
+    {% for order in orders %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ order.barber }}</a>
+              <small class="text-muted">{{ order.day }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ order.haircut_name }}</a></h2>
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book Now</a>
+            <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Post a Review</a>
+          </div>
+
+        </article>
+    {% endfor %}
+{% endblock%}
+
+{% block username %}
+{{user}}
+{% endblock %}
+

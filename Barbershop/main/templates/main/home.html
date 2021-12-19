@@ -1,0 +1,68 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-center form_container">
+    <fieldset style="background-color:lightgray;">
+        <legend>Booking</legend>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+        <thead>
+            <tr>
+              <th scope="col">Barber</th>
+              <th scope="col">Day</th>
+              <th scope="col">Time</th>
+              <th scope="col">Haircut</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+
+                <td>
+                    <select id="select-box1" class="select" name="barber">
+                        {% for barber in BarberNames %}
+                            <option>{{barber}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <form>
+                       <input type="date" name="calendar">
+                    </form>
+                </td>
+                <td>
+                    <select id="select-box2" class="select" name="time">
+                        {% for key, value in times %}
+                            <option>{{value}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select id="select-box3" class="select" name="haircuts">
+                        {% for key, value in haircuts %}
+                            <option>{{value}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><a href="{% url 'create_book' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book Now</a></td>
+<!--                <td> <button type="button" class="btn btn-outline-light me-2" style="color:black">Book</button></td>-->
+        </tr>
+        </tbody>
+        </table>
+        </fieldset>
+
+    </form>
+</div>
+       <!-- <div class="select-box">
+
+            <label for="select-box1" class="label select-box1"><span class="label-desc">Choose your country</span> </label>
+            <select id="select-box1" class="select">
+              <option value="Choice 1">Falkland Islands</option>
+              <option value="Choice 2">Germany</option>
+              <option value="Choice 3">Neverland</option>
+            </select>
+
+        </div>
+            </table>
+    </div>-->
+{% endblock content %}
