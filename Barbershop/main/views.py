@@ -88,18 +88,18 @@ def order(request):
 
 def barber_book(request):
     context = {}
-    #print(Roles.objects.all().filter(name=request.user))
-    # print(request.user)
-    # role = Roles.objects.all().filter(name=request.user.username)
-    # print(role)
     barber_booked = []
+    barber_booked_customer = []
     orders = Order.objects.all()
     for book in orders:
         if book.role is not None and book.role.user == request.user:
-            barber_booked.append(book)
+            barber_booked.append([book, book.customer.name])
+            barber_booked_customer.append(book.customer.name)
 
     context['orders'] = barber_booked
     context['user'] = request.user
+    context['orders_customers'] = barber_booked
+    print(barber_booked_customer)
 
     return render(request, 'main/barber_booked.html', context)
 
