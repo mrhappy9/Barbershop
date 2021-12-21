@@ -25,9 +25,3 @@ class CustomerInformation(ModelForm):
 
 class TimeForm(forms.Form):
     category_time = forms.ChoiceField(choices=Order.TIME)
-
-#
-# class UserFrom(ModelForm):
-#     class Meta:
-#         model = Users
-#         fields = ['name', 'username', 'password']
